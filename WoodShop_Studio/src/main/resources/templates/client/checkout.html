@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.png"
+          type="image/x-icon"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet"
+          th:href="@{/client/fonts/fontawesome-free-5.15.4-web/fontawesome-free-5.15.4-web/css/all.min.css}">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" th:href="@{/client/css/reponsive.css}">
+    <link rel="stylesheet" th:href="@{/client/css/checkout.css}">
+    <title> Thanh Toán </title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="header">
+        <div class="top-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="header-icon">
+                            <ul class="d-flex">
+                                <li class="icon"><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                                <li class="icon"><a href=""><i class="fab fa-instagram"></i></a></li>
+                                <li class="icon"><a href=""><i class="fab fa-twitter"></i></a></li>
+                                <li class="icon"><a href=""><i class="fab fa-youtube"></i></a></li>
+                                <li class="icon"><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="header-contact">
+                            <ul class="d-flex justify-content-end">
+                                <li class="contact">
+                                    <a href="" class="header-shop-map">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        Hệ thống cửa hàng
+                                    </a>
+                                </li>
+                                <li class="contact">
+                                    <a href="" class="header-shop-phone">
+                                        <i class="fas fa-phone"></i>
+                                        (+84)934 323 882
+                                    </a>
+                                </li>
+                                <li class="contact">
+                                    <a href="" class="header-shop-support">
+                                        <i class="fas fa-envelope"></i>
+                                        support@suplo.vn
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-menu">
+            <div class="container">
+                <div class="row">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <div class="container-fluid">
+                            <div class="logo">
+                                <a th:href="@{/}">
+                                    <img th:src="@{/client/img/logo.png}" alt="Image Error">
+                                </a>
+                            </div>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse hide justify-content-center"
+                                 id="navbarSupportedContent">
+                                <ul class="navbar-nav  mb-2 mb-lg-0 justify-content-center">
+                                    <li class="nav-item">
+                                        <th:block sec:authorize="isAnonymous()">
+                                            <a class="nav-link active home" aria-current="page" th:href="@{/}">Trang
+                                                chủ</a>
+                                        </th:block>
+                                        <th:block sec:authorize="isAuthenticated()">
+                                            <a class="nav-link active home" aria-current="page" th:href="@{/}">Trang
+                                                chủ</a>
+                                        </th:block>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" th:href="@{/shop}">Sản phẩm</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" th:href="@{/new}">Tin tức</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page"
+                                           th:href="@{/contact/saveOrEdit}">Liên hệ</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" th:href="@{/about}">Giới
+                                            thiệu</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <ul class="icon-nav justify-content-end d-flex">
+                                <li class="user_body">
+                                    <th:block sec:authorize="isAnonymous()">
+                                        <a class="icon-user" th:href="@{/login}">
+                                            <i class="fas fa-user-alt"></i>
+                                        </a>
+                                    </th:block>
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        <a class="username" th:href="@{/account}"
+                                           sec:authentication="principal.firstname"></a>
+                                    </th:block>
+                                </li>
+                                <li>
+                                    <th:block sec:authorize="isAnonymous()">
+                                        <a class="icon-buy" th:href="@{/cart}">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <div class="number-buy">0</div>
+                                        </a>
+                                    </th:block>
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        <a class="icon-buy" th:href="@{/cart}">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <div class="number-buy" th:text="${countCart}"></div>
+                                        </a>
+                                    </th:block>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="responsive-navbar text-center hide an">
+            <div class="row">
+                <div class="col-12">
+                    <form th:action="@{/shop/search}" method="get">
+                        <div class="search">
+                            <input type="text" placeholder="Tìm kiếm..." name="keyword">
+                            <button type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <hr>
+                    <div class="row">
+                        <div class="col-6 d-flex flex-column align-items-start res-left">
+                            <div class="res-home">
+                                <a th:href="@{/}"><i class="fas fa-house-user"></i>Trang chủ</a>
+                            </div>
+                            <div class="resproducts">
+                                <a th:href="@{/shop}"><i class="fas fa-cart-plus"></i>Sản phẩm</a>
+                            </div>
+                            <div class="res-contact">
+                                <a th:href="@{/contact/saveOrEdit}"><i class="fas fa-map-marker-alt"></i>Liên hệ</a>
+                            </div>
+                            <div class="res-about">
+                                <a href=""><i class="fas fa-address-card"></i>Giới thiệu</a>
+                            </div>
+                            <div class="about-us">
+                                <a href=""><i class="fab fa-themeisle"></i>Về chúng tôi</a>
+                            </div>
+                        </div>
+                        <div class="col-6 d-flex flex-column align-items-start res-right">
+                            <div class="love">
+                                <a href=""><i class="far fa-heart"></i>Yêu thích</a>
+                            </div>
+                            <div class="res-n">
+                                <a th:href="@{/new}"><i class="far fa-newspaper"></i>Tin tức</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="buy-success d-flex justify-content-center align-items-center hide">
+        <p>Đặt hàng thành công</p>
+    </div>
+    <div class="banner">
+        <div class="inner">
+            <div class="container text-center">
+                <p class="title-heading">THANH TOÁN</p>
+                <p class="intro">
+                    <a href="">Trang chủ</a>/ <a href="">Giỏ hàng</a> /Thanh toán
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="checkout">
+        <div class="container">
+            <form th:action="@{/checkout/save}" method="post" th:object="${checkout}">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <p class="transport"></p>
+                        <p class="tran-heading">1.Thông tin giao hàng</p>
+                        <div class="row">
+                            <div class="col-7">
+                                <input type="name" placeholder="Họ Tên" name="fullName" th:value="${users.firstName}"/>
+                            </div>
+                            <div class="col-5">
+                                <input type="number" placeholder="Số điện thoại" name="phone"
+                                       th:value="${users.phone}"/>
+                            </div>
+                        </div>
+                        <input type="email" placeholder="Email" name="email" th:value="${users.email}"/>
+
+                        <input type="text" placeholder="Địa chỉ" name="address" th:value="${users.address}"/>
+
+                        <textarea name="note" id="" cols="30" rows="10" th:field="*{note}"
+                                  placeholder="Ghi chú"></textarea>
+
+                        <p></p>
+                        <div class="payment">
+                            <p class="pay-heading">2. Phương thức thanh toán</p>
+                            <div class="live d-flex align-items-center">
+                                <input type="radio" class="radio1" name="ok"/>
+                                <i class="fas fa-truck"></i>
+                                <p>THANH TOÁN TRỰC TIẾP KHI NHẬN HÀNG</p>
+                            </div>
+                            <div class="oline d-flex align-items-center">
+                                <input type="radio" class="radio1" name="ok"/>
+                                <i class="fas fa-id-card"></i>
+                                <p>THANH TOÁN TRỰC TUYẾN</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <p class="order-heading">3. Đặt hàng</p>
+                        <div class="order" th:each=" item : ${carts}">
+                            <div class="order-intro">
+                                <div class="order-info">
+                                    <div class="row align-items-center">
+                                        <div class="col-3">
+                                            <img th:src="${item.product.productImagePath}" alt="Image Error">
+                                        </div>
+                                        <div class="col-9" th:text="${item.product.name}"></div>
+                                    </div>
+                                </div>
+                                <div class="price">
+                                    <div class="row">
+                                        <div class="col-4">Giá:</div>
+                                        <div class="col-8 text-end" th:text="${item.product.price} +' '+'$'"></div>
+                                    </div>
+                                </div>
+                                <div class="soluong">
+                                    <div class="row">
+                                        <div class="col-4">Số lượng:</div>
+                                        <div class="col-8 text-end" th:text="${item.quantity}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="total">
+                            <div class="row">
+                                <div class="col-4">Tổng cộng:</div>
+                                <div class="col-8 text-end tongtatca">[[${total}+' '+'$']]</div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn" type="submit">Đặt hàng</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-12">
+                        <img th:src="@{/client/img/logo.png}" alt="" class="footer-img">
+                        <div class="address">
+                            <i class="fas fa-home"></i>
+                            Số 1 Lương Yên, Q.Hai Bà Trưng, Hà Nội
+                        </div>
+                        <div class="phone-footer">
+                            <i class="fas fa-phone"></i>
+                            (+84)934 323 882
+                        </div>
+                        <div class="supports">
+                            <i class="far fa-envelope"></i>
+                            support@suplo.vn
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-12 cot2">
+                        <h4 class="title-col2">DỊCH VỤ KHÁCH HÀNG</h4>
+                        <p><a href="">Hướng dẫn đặt mua hàng</a></p>
+                        <p><a href="">Kinh nghiệm mua hàng</a></p>
+                        <p><a href="">Đối tác và đại lý</a></p>
+                        <p><a href="">Hình thức thanh toán</a></p>
+                        <p><a href="">Mua hàng và đổi trả</a></p>
+                    </div>
+                    <div class="col-lg-3 col-sm-12 cot3">
+                        <h4 class="title-col3">HỖ TRỢ</h4>
+                        <p><a href="">Đổi trả</a></p>
+                        <p><a href="">Chính sách bảo hành</a></p>
+                        <p><a href="">Chính sách vận chuyển</a></p>
+                        <p><a href="">Điều khoản dịch vụ</a></p>
+                        <p><a href="">Chính sách quyền riêng tư</a></p>
+                    </div>
+                    <div class="col-lg-3 col-sm-12">
+                        <h4 class="title-col4">LIKE SUPLO TRÊN MẠNG XÃ HỘI</h4>
+                        <div class="col4-item">
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                            <a href=""><i class="fab fa-youtube"></i></a>
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-google-plus-g"></i></a>
+                        </div>
+                        <h4 class="title-col4">ĐĂNG KÝ NHẬN TIN</h4>
+                        <div class="col4-input d-flex">
+                            <input placeholder="Nhập email của bạn..." type="text">
+                            <button><a href=""><i class="fab fa-telegram-plane"></i></a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-madeby text-center">
+            <p>Made by © 2021 Nguyễn Văn Linh</p>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script th:src="@{/client/js/addcart.js}"></script>
+<script th:src="@{/client/js/checkout.js}"></script>
+</body>
+</html>

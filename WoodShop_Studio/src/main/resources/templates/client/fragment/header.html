@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="header">
+    <div class="top-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <div class="header-icon">
+                        <ul class="d-flex">
+                            <li class="icon"><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                            <li class="icon"><a href=""><i class="fab fa-instagram"></i></a></li>
+                            <li class="icon"><a href=""><i class="fab fa-twitter"></i></a></li>
+                            <li class="icon"><a href=""><i class="fab fa-youtube"></i></a></li>
+                            <li class="icon"><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="header-contact">
+                        <ul class="d-flex justify-content-end">
+                            <li class="contact">
+                                <a href="" class="header-shop-map">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Hệ thống cửa hàng
+                                </a>
+                            </li>
+                            <li class="contact">
+                                <a href="" class="header-shop-phone">
+                                    <i class="fas fa-phone"></i>
+                                    (+84)934 323 882
+                                </a>
+                            </li>
+                            <li class="contact">
+                                <a href="" class="header-shop-support">
+                                    <i class="fas fa-envelope"></i>
+                                    support@suplo.vn
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-menu">
+        <div class="container">
+            <div class="row">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="container-fluid">
+                        <div class="logo">
+                            <a th:href="@{/}">
+                                <img th:src="@{/client/img/logo.png}" alt="Image Error">
+                            </a>
+                        </div>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse hide justify-content-center" id="navbarSupportedContent">
+                            <ul class="navbar-nav  mb-2 mb-lg-0 justify-content-center">
+                                <li class="nav-item">
+                                    <th:block sec:authorize="isAnonymous()">
+                                        <a class="nav-link active home" aria-current="page" th:href="@{/}">Trang chủ</a>
+                                    </th:block>
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        <a class="nav-link active home" aria-current="page" th:href="@{/}">Trang chủ</a>
+                                    </th:block>
+                                </li>
+                                <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" th:href="@{/shop}">Sản phẩm</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" th:href="@{/new}">Tin tức</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" th:href="@{/admin/contact/saveOrEdit}">Liên hệ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" th:href="@{/about}">Giới thiệu</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <ul class="icon-nav justify-content-end d-flex">
+                            <li class="user_body">
+                                <th:block sec:authorize="isAnonymous()">
+                                    <a class="icon-user" th:href="@{/login}">
+                                        <i class="fas fa-user-alt"></i>
+                                    </a>
+                                </th:block>
+                                <th:block sec:authorize="isAuthenticated()">
+                                    <a  class="username" th:href="@{/account}" sec:authentication="principal.firstname"></a>
+                                </th:block>
+                            </li>
+                            <li>
+                                <th:block sec:authorize="isAnonymous()">
+                                    <a class="icon-buy" th:href="@{/cart}">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <div class="number-buy">0</div>
+                                    </a>
+                                </th:block>
+                                <th:block sec:authorize="isAuthenticated()">
+                                    <a class="icon-buy" th:href="@{/cart}">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <div class="number-buy" th:text="${countCart}"></div>
+                                    </a>
+                                </th:block>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="responsive-navbar text-center hide an">
+        <div class="row">
+            <div class="col-12">
+                <form th:action="@{/shop/search}" method="get">
+                    <div class="search">
+                        <input type="text" placeholder="Tìm kiếm..." name="keyword">
+                        <button type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <hr>
+                <div class="row">
+                    <div class="col-6 d-flex flex-column align-items-start res-left">
+                        <div class="res-home">
+                            <a th:href="@{/}"><i class="fas fa-house-user"></i>Trang chủ</a>
+                        </div>
+                        <div class="resproducts">
+                            <a th:href="@{/shop}"><i class="fas fa-cart-plus"></i>Sản phẩm</a>
+                        </div>
+                        <div class="res-contact">
+                            <a th:href="@{/contact/saveOrEdit}" ><i class="fas fa-map-marker-alt"></i>Liên hệ</a>
+                        </div>
+                        <div class="res-about">
+                            <a href=""><i class="fas fa-address-card"></i>Giới thiệu</a>
+                        </div>
+                        <div class="about-us">
+                            <a href=""><i class="fab fa-themeisle"></i>Về chúng tôi</a>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex flex-column align-items-start res-right">
+                        <div class="love">
+                            <a href=""><i class="far fa-heart"></i>Yêu thích</a>
+                        </div>
+                        <div class="res-n">
+                            <a th:href="@{/new}"><i class="far fa-newspaper"></i>Tin tức</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
